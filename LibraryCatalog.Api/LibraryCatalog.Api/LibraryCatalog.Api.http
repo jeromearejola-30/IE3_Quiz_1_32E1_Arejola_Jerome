@@ -1,0 +1,49 @@
+@LibraryCatalog.Api_HostAddress = https://localhost:7007
+
+### 1. GET all books (Expect 200 OK)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books
+Accept: application/json
+
+### 2. GET book by ID (Expect 200 OK)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books/1
+Accept: application/json
+
+### 3. GET missing book (Expect 404 Not Found)
+GET {{LibraryCatalog.Api_HostAddress}}/api/books/999
+Accept: application/json
+
+### 4. POST valid book (Expect 201 Created)
+POST {{LibraryCatalog.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt",
+  "isAvailable": true,
+  "yearPublished": 1999
+}
+
+### 5. POST invalid book (Expect 400 Bad Request)
+POST {{LibraryCatalog.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "Andrew Hunt",
+  "isAvailable": true,
+  "yearPublished": 1700
+}
+
+### 6. PUT update book 1 (Expect 204 No Content)
+PUT {{LibraryCatalog.Api_HostAddress}}/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture (Updated)",
+  "author": "Robert C. Martin",
+  "isAvailable": false,
+  "yearPublished": 2017
+}
+
+### 7. DELETE book 1 (Expect 204 No Content)
+DELETE {{LibraryCatalog.Api_HostAddress}}/api/books/1
